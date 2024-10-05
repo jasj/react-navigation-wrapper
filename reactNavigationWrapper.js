@@ -1,4 +1,4 @@
-// reactNavigationWrapper.js
+import React from 'react';
 import * as ReactNavigation from '@react-navigation/native';
 import * as ReactNavigationStack from '@react-navigation/stack';
 
@@ -17,10 +17,18 @@ export const {
   createStackNavigator,
 } = ReactNavigationStack;
 
-// Si necesitas compatibilidad con versiones anteriores, puedes agregar:
 export const NavigationActions = CommonActions;
+
+// Implementación personalizada de withNavigation
+export function withNavigation(Component) {
+  return function NavigationInjectedComponent(props) {
+    const navigation = useNavigation();
+    return <Component {...props} navigation={navigation} />;
+  }
+}
 
 export default {
   ...ReactNavigation,
   ...ReactNavigationStack,
+  withNavigation,
 };
