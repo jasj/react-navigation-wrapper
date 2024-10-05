@@ -35,10 +35,33 @@ export function withNavigationFocus(Component) {
   }
 }
 
+// Función de compatibilidad para createBottomTabNavigator
+export function createBottomTabNavigator(routeConfigs, navigatorConfig) {
+  const { createBottomTabNavigator } = require('@react-navigation/bottom-tabs');
+  const Tab = createBottomTabNavigator();
+  
+  return () => (
+    <Tab.Navigator {...navigatorConfig}>
+      {Object.entries(routeConfigs).map(([name, screen]) => (
+        <Tab.Screen 
+          key={name}
+          name={name}
+          component={screen.screen || screen}
+          options={screen.navigationOptions || {}}
+        />
+      ))}
+    </Tab.Navigator>
+  );
+}
+
+// Función simulada para Dropdown (si es necesaria)
+const Dropdown = () => {};
+
 export default {
-  Dropdown :() => {},
+  Dropdown,
   ...ReactNavigation,
   ...ReactNavigationStack,
   withNavigation,
   withNavigationFocus,
+  createBottomTabNavigator,
 };
