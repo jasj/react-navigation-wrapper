@@ -27,8 +27,17 @@ export function withNavigation(Component) {
   }
 }
 
+// Implementación personalizada de withNavigationFocus
+export function withNavigationFocus(Component) {
+  return function NavigationFocusInjectedComponent(props) {
+    const isFocused = useIsFocused();
+    return <Component {...props} isFocused={isFocused} />;
+  }
+}
+
 export default {
   ...ReactNavigation,
   ...ReactNavigationStack,
   withNavigation,
+  withNavigationFocus,
 };
