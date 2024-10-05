@@ -36,6 +36,7 @@ export function withNavigationFocus(Component) {
 }
 
 export default {
+  Dropdown :() => {},
   ...ReactNavigation,
   ...ReactNavigationStack,
   withNavigation,
